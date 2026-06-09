@@ -123,31 +123,40 @@ startBtn.addEventListener("click", () => {
     });
 
 });
-document
-.querySelectorAll(
-'.progress-box input'
-)
-.forEach(box=>{
 
-box.addEventListener(
-'change',
-function(){
 
-if(this.checked){
 
-this.parentElement.style.opacity='0.7';
+const checkboxes =
+document.querySelectorAll(
+".progress-box input"
+);
 
-this.parentElement.style.textDecoration='line-through';
+checkboxes.forEach((box,index)=>{
 
-}
-else{
+    
+    if(box.checked){
 
-this.parentElement.style.opacity='1';
+        box.parentElement.classList.add(
+            "completed"
+        );
 
-this.parentElement.style.textDecoration='none';
+    }
 
-}
+    box.addEventListener(
+        "change",
+        ()=>{
 
-});
+            localStorage.setItem(
+                `progress-${index}`,
+                box.checked
+            );
+
+            box.parentElement.classList.toggle(
+                "completed",
+                box.checked
+            );
+
+        }
+    );
 
 });
